@@ -1,0 +1,25 @@
+h1 {
+    font-family: 'Helvetica';
+    color: white;
+    background-color: #333;
+}
+
+p {
+    font-size: 14pt;
+    font-family: 'Comic Sans', fantasy;
+}
+
+img {
+    width: 200px;
+}
+
+.highlighted {
+    background-color: yellow;
+}
+.puppy {
+    width: 400px;
+}
+
+.examples {
+    text-decoration: underline;
+}
