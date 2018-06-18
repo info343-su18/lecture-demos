@@ -1,0 +1,14 @@
+{
+  "name": "lecture-demos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest-style-matchers": "^0.1.1"
+  }
+}
