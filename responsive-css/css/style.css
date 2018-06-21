@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Flexbox! */
+.boxes {
+    border: 2px solid green;
+
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.boxes > div {
+    border: 2px solid rebeccapurple;
+    margin: .5em 0;
+    padding: 0 .5em;
+    background-color: orange;
+
+    flex-basis: 50%;
+}
