@@ -8,18 +8,21 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="container">
   <header>
-    <h1>Responsive CSS Demo</h1>
-    <p>Change you can see</p>
-  
+    <h1 class="text-white bg-primary pb-3 pt-3">Responsive CSS Demo</h1>
+    <p class="lead">Change you can see</p>
+  </header>
 
   <nav>
     <a href="https://ischool.uw.edu/">iSchool</a></li>
-    <a href="http://getbootstrap.com/">Get Bootstrap</a>
+    <a href="http://getbootstrap.com/" class="btn btn-primary">Get Bootstrap</a>
   </nav>
 
   <section>
@@ -27,7 +30,7 @@
     <p><a href="#more">More content...</a></p>
   </section>
 
-  <section class="boxes">
+  <section class="boxes d-none d-md-block">
     <div class="thing-a">
       <p>Thing A</p>
     </div>
@@ -49,26 +52,28 @@
   </section>
 
   <section id="more">
-    <div>
+    <div class="row">
+      <div class="col-6 col-md-4 col-lg-2">
         <h2>Other Thing A</h2>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam, est!</p>
-    </div>
-    <div>
-      <h2>Other Thing B</h2>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum repudiandae tempore nobis?</p>
-    </div>
-    <div>
-      <h2>Other Thing C</h2>
-      <p>Lorem ipsum dolor sit amet consectetur.</p>
-    </div>
-    <div>
-      <h2>Other Thing D</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    </div>
-    <div>
-      <h2>Other Thing E</h2>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim, illum?</p>
-    </div>
+      </div>
+      <div class="col-6  col-md-4 col-lg-2">
+        <h2>Other Thing B</h2>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum repudiandae tempore nobis?</p>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <h2>Other Thing C</h2>
+        <p>Lorem ipsum dolor sit amet consectetur.</p>
+      </div>
+      <div class="col-6 col-md-4">
+        <h2>Other Thing D</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </div>
+      <div class="col-6 col-md-4">
+        <h2>Other Thing E</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim, illum?</p>
+      </div>
+     </div> <!-- end row -->
   </section>
 </body>
 </html>

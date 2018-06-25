@@ -2,15 +2,23 @@
     box-sizing: border-box;
 }
 
-body {
+/* body {
     font-family: 'Roboto', sans-serif;
+} */
+
+/* body {
+    background-color: red;
 }
+
+body {
+    background-color: blue;
+} */
 
 /* Flexbox! */
 .boxes {
     border: 2px solid green;
 
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
 }
 
@@ -22,3 +30,30 @@ body {
 
     flex-basis: 50%;
 }
+
+/* Media Query */
+@media (min-width: 768px){
+
+    body {
+        /* background-color: yellow; */
+    }
+
+    .boxes > div {
+        flex-basis: 33%;
+    }
+}
+
+@media (min-width: 992px){
+    body {
+        /* background-color: pink; */
+    }
+
+    .boxes > div {
+        flex-basis: 25%;
+        flex-grow: 1;
+    }
+}
+
+
+
+
