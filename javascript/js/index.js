@@ -1,5 +1,9 @@
 'use strict';
 
+
+
+
+/*** JAVASCRIPT LECTURE ***/
 /* code goes here */
 // console.log("Hello world!");
 
@@ -16,20 +20,20 @@
 // let hoursSlept; 
 // console.log(hoursSlept); //=> undefined
 
-let ages = {'sarah':42, 'amit':35, 'zhang':13}
+// let ages = {'sarah':42, 'amit':35, 'zhang':13}
 
-let array = [1,2,3,4];
+// let array = [1,2,3,4];
 
-for(let i=0; i<array.length; i++){
-    console.log(i);
-}
+// for(let i=0; i<array.length; i++){
+//     console.log(i);
+// }
 
-let agesKeys = Object.keys(ages);
+// let agesKeys = Object.keys(ages);
 
 
-function sayHello() {
-    let secretName = "Clark Kent";
-    console.log("Hello");
-}
+// function sayHello() {
+//     let secretName = "Clark Kent";
+//     console.log("Hello");
+// }
 
-sayHello();
+// sayHello();
