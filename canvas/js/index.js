@@ -27,6 +27,10 @@ brush.moveTo(400,200);
 brush.lineTo(300,100);
 brush.stroke(); //now draw the path
 
+brush.beginPath(); //start a new path
+          //cx  cy   r  angle-range
+brush.arc(250, 250, 50, 0, 2*Math.PI);
+brush.fill();
 
 
 //animate!
