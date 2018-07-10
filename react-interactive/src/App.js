@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import 'whatwg-fetch';
 
 const SAMPLE_TASKS = [
@@ -73,7 +72,7 @@ class App extends Component {
 
 class TaskList extends Component {  
   render() {
-    
+    //do data processing
     let taskComponents = this.props.tasks
       .filter((task) => !task.complete)
       .map((eachTask) => {
@@ -95,6 +94,7 @@ class TaskList extends Component {
 }
 
 class Task extends Component {
+  //helper method
   getClassName() {
     let className = '';
     if(this.props.task.complete){
@@ -106,26 +106,18 @@ class Task extends Component {
   //change this in a moment
   handleClick() {
     this.props.howToToggle(this.props.task.id);
-
-    // //want: this.props.task.complete = false
-    // console.log("You clicked on '"+this.props.task.description+"'");
-    // let newCrossed = !this.state.crossedOut;
-    // this.setState({crossedOut: newCrossed}); //update the state and RE-RENDER
-    // console.log("in handler", this.state);
   }
 
   componentDidMount() {
-    console.log("mounting", this.props.task.description);
+    // console.log("mounting", this.props.task.description);
   }
 
   componentWillUnmount() {
-    console.log("unmounting", this.props.task.description);
+    // console.log("unmounting", this.props.task.description);
   }
 
   render() {
-    //console.log(this.props.task);    
-    let thisTask = this.props.task;
-
+    let thisTask = this.props.task; //can give local name for readability
     return (
       <li 
         className={this.getClassName()} 
