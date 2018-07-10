@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 
-const SAMPLE_TASKS = [
-  {id:1, description:'Learn JSX', complete:true},
-  {id:2, description:'Learn about React State', complete:false},
-  {id:3, description:'Get some sleep', complete:false} 
-];
+import { Button } from 'reactstrap';
+
+// const SAMPLE_TASKS = [
+//   {id:1, description:'Learn JSX', complete:true},
+//   {id:2, description:'Learn about React State', complete:false},
+//   {id:3, description:'Get some sleep', complete:false} 
+// ];
 
 
 class App extends Component {
@@ -44,10 +46,21 @@ class App extends Component {
     this.setState({tasks: updatedTasks}); //update the state and RE-RENDER
   }
 
+  addTask(newDescription) {
+    let currentTasks = this.state.tasks;
+    let newTask = {
+      id: currentTasks.length+1,
+      description: newDescription,
+      complete: false
+    }
+    currentTasks.push(newTask);
+    this.setState({tasks: currentTasks});
+  }
+
   render() {
 
     let incomplete = this.state.tasks.filter((task) => !task.complete);
-    console.log(incomplete.length);
+    //console.log("Number of tasks:", incomplete.length);
 
     //CONDITIONAL RENDERING
     let listToShow = null;
@@ -64,7 +77,7 @@ class App extends Component {
       <div className="container">
         <p className="lead">Things I have to do ({incomplete.length})</p>
         {listToShow}
-        <AddTaskForm />
+        <AddTaskForm howToAdd={(descr) => this.addTask(descr)} />
       </div>
     );
   }
@@ -74,7 +87,7 @@ class TaskList extends Component {
   render() {
     //do data processing
     let taskComponents = this.props.tasks
-      .filter((task) => !task.complete)
+      //.filter((task) => !task.complete)
       .map((eachTask) => {
         return (
           <Task 
@@ -130,14 +143,44 @@ class Task extends Component {
 }
 
 class AddTaskForm extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {newTask: ''}; //what is typed in
+  }
+
+  handleChange(event){    
+    //let whichElement = event.target;
+    //let whatValue = whichElement.value;
+    let value = event.target.value;
+
+
+    console.log("I changed to:", value);
+    this.setState({newTask: value})
+
+  }
+
+  handleClick(event){
+    event.preventDefault(); //don't actually submit the form
+    //take this.state.newTask and add it to the list
+    this.props.howToAdd(this.state.newTask);
+    this.setState({newTask: ''});
+  }
+
   render() {
     return (
       <form>
         <input 
           className="form-control mb-3"
           placeholder="What else do you have to do?"
+          value={this.state.newTask}
+          onChange={(evt) => this.handleChange(evt)}
           />
-        <button className="btn btn-primary">Add task to list</button>
+        <Button color="primary" onClick={(evt) => this.handleClick(evt)}
+        >
+          Add task to list
+        </Button>
+        <p>You've type: {this.state.newTask.length} characters</p>
       </form>
     );
   }
