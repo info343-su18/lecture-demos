@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import 'whatwg-fetch';
+
+import firebase from 'firebase/app';
 
 export default class TaskApp extends Component {
   constructor(props){
@@ -13,31 +14,44 @@ export default class TaskApp extends Component {
 
   componentDidMount() {
     //asynchronously load data!
+    let taskRef = firebase.database().ref('tasks');
+    taskRef.on('value', (snapshot) => {
+      this.setState({
+        tasks: snapshot.val()
+      })
+
+    }) //"value change" events
   }
 
   toggleComplete(taskId){
     //toggle task completion
+    let localTask = this.state.tasks[taskId];
+
+    let taskRef = firebase.database().ref('tasks').child(taskId);
+    taskRef.update({
+      complete: !localTask.complete
+    })
+
+    console.log(taskId);
   }
 
   addTask(newDescription) {
     //add additional task
+    console.log("adding task");
+
+    //modifying the task
+    let tasksRef = firebase.database().ref('tasks');
+
+    let newTask = {
+      description: newDescription,
+      complete: false
+    }
+
+    tasksRef.push(newTask)
+      .catch(console.log)
   }
 
   render() {
-
-    let incomplete = this.state.tasks.filter((task) => !task.complete);
-    //console.log("Number of tasks:", incomplete.length);
-
-    //CONDITIONAL RENDERING
-    let listToShow = null;
-    if(incomplete.length !== 0){ //nothing to do
-      listToShow = <TaskList 
-        tasks={this.state.tasks} 
-        howToToggle={(id) => this.toggleComplete(id)} 
-      />
-    } else {
-      listToShow = <p className="alert-alert-warning">Downloading...</p>
-    }
 
     return (
       <div className="container">
@@ -54,10 +68,20 @@ export default class TaskApp extends Component {
 
 class TaskList extends Component {  
   render() {
+
+    console.log(this.props.tasks);
+
     if(this.props.tasks == null) return null; //if no tasks, show nothing
 
     //do data processing
-    let taskComponents = this.props.tasks.map((eachTask) => {
+    let keyArray = Object.keys(this.props.tasks);
+    let taskArray = keyArray.map((key) => {
+      let objAtKey = this.props.tasks[key]
+      objAtKey.id = key;
+      return objAtKey;
+    })
+
+    let taskComponents = taskArray.map((eachTask) => {
       return (
         <Task 
           key={eachTask.id} 
