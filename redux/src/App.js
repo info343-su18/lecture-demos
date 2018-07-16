@@ -1,63 +1,58 @@
 import React, { Component } from 'react';
 
-const SAMPLE_TASKS = [
-  {id:1, description:'Make a task list', complete:true},
-  {id:2, description:'Make another one', complete:true},
-  {id:3, description:'Make a task list with Redux', complete:false}, 
-];
+import { connect } from 'react-redux';
 
+import * as Action from './store';
+
+function mapStateToProps(state) {
+  return state;
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    howToToggle: (taskId) => dispatch(Action.toggleTask(taskId)),
+    howToAdd: (description) => dispatch(Action.addTask(description)),
+    toggleShowCompleted: () => dispatch(Action.toggleShowComplete())
+  }
+}
+
+let makeConnection = connect(mapStateToProps, mapDispatchToProps);
 
 class App extends Component {
-  constructor(props){
-    super(props)
-    this.state = { 
-      tasks: SAMPLE_TASKS,
-      showCompleted: true
-    };
-  }
+  // constructor(props){
+  //   super(props)
+  //   this.state = store.getState();
+  // }
 
-  toggleComplete(taskId){
-    let updatedTasks = this.state.tasks.map((task) => {
-      if(task.id === taskId){
-        task.complete = !task.complete; //toggle
-      }
-      return task;
-    })
+  // componentDidMount() {
+  //   store.subscribe(() => {
+  //     this.setState(store.getState());
+  //   })
+  // }
 
-    this.setState({tasks: updatedTasks}); //update the state and RE-RENDER
-  }
+  // toggleComplete(taskId){
+  //   store.dispatch(Action.toggleTask(taskId))
+  // }
 
-  addTask(description){
-    let newTask = {
-      id:this.state.tasks.length + 1,
-      description: description,
-      complete: false
-    }
-    console.log(newTask);
+  // addTask(description){
+  //   store.dispatch(Action.addTask(description))
+  // }
 
-    let updatedTasks = this.state.tasks.concat(newTask);
-    this.setState({tasks:updatedTasks});
-  }
-
-  toggleShowCompleted() {
-    this.setState({showCompleted : !this.state.showCompleted});
-  }
+  // toggleShowCompleted() {
+  //   store.dispatch(Action.toggleShowComplete());
+  // }
 
   render() {
     return (
       <div className="container">
         <p className="lead">Things I have to do...</p>
-        <TaskList
-          tasks={this.state.tasks}
-          showCompleted={this.state.showCompleted}
-          howToToggle={(id) => this.toggleComplete(id)} 
-        />
-        <AddTaskForm howToAdd={(descr) => this.addTask(descr)} />
+        <ConnectedTaskList/>
+        <ConnectedTaskForm/>
         <button 
           className="btn btn-warning mt-2"
-          onClick={()=>this.toggleShowCompleted()}
+          onClick={()=>this.props.toggleShowCompleted()}
           >
-            {this.state.showCompleted ? 'Show Incomplete Tasks' : 'Show All Tasks'}
+            {this.props.showCompleted ? 'Show Just Incomplete Tasks' : 'Show All Tasks'}
         </button>
       </div>
     );
@@ -141,4 +136,9 @@ class AddTaskForm extends Component {
   }
 }
 
-export default App;
+let ConnectedApp = makeConnection(App);
+let ConnectedTaskList = makeConnection(TaskList);
+let ConnectedTaskForm = makeConnection(AddTaskForm);
+let ConnectedTask = makeConnection(Task);
+
+export default ConnectedApp;
